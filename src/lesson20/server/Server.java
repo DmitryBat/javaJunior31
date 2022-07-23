@@ -10,8 +10,8 @@ import java.util.Locale;
 import java.util.Scanner;
 
 /*
-* После подключение клиента сервер запрашивает имя
-* в дальнейшем все сообщения будут отправляться в формате Имя: сообщение
+* РџРѕСЃР»Рµ РїРѕРґРєР»СЋС‡РµРЅРёРµ РєР»РёРµРЅС‚Р° СЃРµСЂРІРµСЂ Р·Р°РїСЂР°С€РёРІР°РµС‚ РёРјСЏ
+* РІ РґР°Р»СЊРЅРµР№С€РµРј РІСЃРµ СЃРѕРѕР±С‰РµРЅРёСЏ Р±СѓРґСѓС‚ РѕС‚РїСЂР°РІР»СЏС‚СЊСЃСЏ РІ С„РѕСЂРјР°С‚Рµ РРјСЏ: СЃРѕРѕР±С‰РµРЅРёРµ
 *
  **/
 
@@ -20,19 +20,19 @@ public class Server {
         try {
             ArrayList<User> users = new ArrayList<>();
             ServerSocket serverSocket = new ServerSocket(9743);
-            System.out.println("Сервер запущен");
+            System.out.println("РЎРµСЂРІРµСЂ Р·Р°РїСѓС‰РµРЅ");
             while (true){
                 Socket socket = serverSocket.accept();
                 User currentUser = new User(socket);
 
                 users.add(currentUser);
-                System.out.println("Клиент подключился");
+                System.out.println("РљР»РёРµРЅС‚ РїРѕРґРєР»СЋС‡РёР»СЃСЏ");
 
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            currentUser.getOut().writeUTF("Введите имя");
+                            currentUser.getOut().writeUTF("Р’РІРµРґРёС‚Рµ РёРјСЏ");
                             String name = currentUser.getIn().readUTF();
                             currentUser.setName(name);
                             while (true){
@@ -46,7 +46,7 @@ public class Server {
                                 }
                             }
                         } catch (IOException e) {
-                            System.out.println("Клиент " + currentUser.getName() + " отключился");
+                            System.out.println("РљР»РёРµРЅС‚ " + currentUser.getName() + " РѕС‚РєР»СЋС‡РёР»СЃСЏ");
                             users.remove(currentUser);
                             }
                     }
